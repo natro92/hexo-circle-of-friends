@@ -191,6 +191,8 @@ class FriendpageLinkSpider(scrapy.Spider):
             userdata["img"] = friend[2]
             userdata["userdata"] = "userdata"
             yield userdata
+            
+    
 
     def start_post_requests(self, domain, parsers, suffixs, meta, errback=None):
         errback = self.errback_handler if not errback else ...
@@ -429,6 +431,16 @@ class FriendpageLinkSpider(scrapy.Spider):
         # 将link处理为标准链接
         if not re.match("^http.?://", link):
             link = domain + link.lstrip("/")
+        # 处理安全跳转URL
+        if link.startswith("https://safe-trans.natro92.fun/?goUrl="):
+            from urllib.parse import unquote
+            try:
+                # 提取goUrl参数并解码
+                encoded_url = link.split("goUrl=")[1]
+                decoded_url = unquote(encoded_url)
+                return decoded_url
+            except:
+                logger.warning(f"URL处理失败: {link}")
         return link
 
     def process_title(self, titles, length):
