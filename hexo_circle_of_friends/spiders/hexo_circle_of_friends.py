@@ -187,6 +187,7 @@ class FriendpageLinkSpider(scrapy.Spider):
             friend = self.friend_list.get()
             userdata = {}
             userdata["name"] = friend[0]
+            print(friend[1])
             # 处理安全跳转URL
             if friend[1].startswith("https://safe-trans.natro92.fun/?goUrl="):
                 from urllib.parse import unquote
