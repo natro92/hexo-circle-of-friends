@@ -187,19 +187,23 @@ class FriendpageLinkSpider(scrapy.Spider):
             friend = self.friend_list.get()
             userdata = {}
             userdata["name"] = friend[0]
-            print(friend[1])
+            # print(friend[1])
             # 处理安全跳转URL
-            if friend[1].startswith("https://safe-trans.natro92.fun/?goUrl="):
+            if friend[1].startswith("https://safe-trans"):
                 from urllib.parse import unquote
                 try:
                     # 提取goUrl参数并解码
                     encoded_url = friend[1].split("goUrl=")[1]
+                    print("encoded is " + encoded_url)
                     decoded_url = unquote(encoded_url)
+                    print("decoded is " + decoded_url)
                     userdata["link"] = decoded_url
                 except:
                     userdata["link"] = friend[1]
                     pass
                     # logger.warning(f"URL处理失败: {link}")
+            else:
+                userdata["link"] = friend[1]
             # userdata["link"] = friend[1]
             userdata["img"] = friend[2]
             userdata["userdata"] = "userdata"
