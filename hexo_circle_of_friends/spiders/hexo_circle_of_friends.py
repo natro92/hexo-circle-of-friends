@@ -167,7 +167,7 @@ class FriendpageLinkSpider(scrapy.Spider):
                 from urllib.parse import unquote
                 try:
                     # 提取goUrl参数并解码
-                    encoded_url = url.split("goUrl=")[1]
+                    encoded_url = friend[1].split("goUrl=")[1]
                     decoded_url = unquote(encoded_url)
                     friend[1] =  decoded_url
                 except:
