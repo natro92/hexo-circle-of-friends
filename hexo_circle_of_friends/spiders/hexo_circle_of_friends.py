@@ -197,7 +197,7 @@ class FriendpageLinkSpider(scrapy.Spider):
                     print("encoded is " + encoded_url)
                     decoded_url = unquote(encoded_url)
                     print("decoded is " + decoded_url)
-                    userdata["link"] = decoded_url
+                    userdata["link"] = decoded_url[:-1]
                 except:
                     userdata["link"] = friend[1]
                     pass
