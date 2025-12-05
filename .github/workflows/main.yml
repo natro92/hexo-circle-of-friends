@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 0,6,12,18,21 * * *"
+  # schedule:
+    # 一直报错先给他停了
+    # - cron: "0 0,6,12,18,21 * * *"
   workflow_dispatch:
 
 env:
